@@ -1,6 +1,6 @@
 # Site settings
-baseurl: "/index.html" # the subpath of your site, e.g. "/blog"
-url: "https://freechessed.github.io/v1" # the base hostname and protocol for your site
+baseurl: "/v1/index.html" # the subpath of your site, e.g. "/blog"
+url: "https://freechessed.github.io/" # the base hostname and protocol for your site
 
 # Build settings
 markdown: kramdown
