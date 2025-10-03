@@ -1,0 +1,5 @@
+- title: About
+  url: /index.html
+- title: Home
+  url: https://freechessed.github.io/main/index.html
+  expected_status: 404
