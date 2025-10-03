@@ -1,0 +1,301 @@
+.desktop {
+  background-color: #ffffff;
+  width: 100%;
+  min-width: 1440px;
+  min-height: 1024px;
+  display: flex;
+}
+
+.desktop .sidebar {
+  display: flex;
+  width: 278px;
+  position: relative;
+  flex-direction: column;
+  height: 1024px;
+  align-items: center;
+  gap: 24px;
+  background-color: #0f172a;
+  border-radius: 0px 10px 10px 0px;
+  box-shadow: 12px 0px 18px #00000080;
+}
+
+.desktop .top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+.desktop .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.desktop .ABC-solutions {
+  position: relative;
+  width: fit-content;
+  margin-top: -1.00px;
+  font-family: var(--XL-semibold-font-family);
+  font-weight: var(--XL-semibold-font-weight);
+  color: #f8fafc;
+  font-size: var(--XL-semibold-font-size);
+  letter-spacing: var(--XL-semibold-letter-spacing);
+  line-height: var(--XL-semibold-line-height);
+  white-space: nowrap;
+  font-style: var(--XL-semibold-font-style);
+}
+
+.desktop .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  flex-grow: 1;
+  z-index: 1;
+}
+
+.desktop .nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0px 24px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.desktop .nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: #bab6ff40;
+  border-radius: 99px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.desktop .nav-item:hover {
+  background-color: #8b85ff60;
+}
+
+.desktop .nav-item::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  width: 6px;
+  height: 6px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.desktop .nav-item:hover::after {
+  opacity: 1;
+}
+
+.desktop .inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  flex: 1;
+  flex-grow: 1;
+}
+
+.desktop .icon {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.desktop .img {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.desktop .label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--base-medium-font-family);
+  font-weight: var(--base-medium-font-weight);
+  color: #ffffff;
+  font-size: var(--base-medium-font-size);
+  letter-spacing: var(--base-medium-letter-spacing);
+  line-height: var(--base-medium-line-height);
+  white-space: nowrap;
+  font-style: var(--base-medium-font-style);
+}
+
+.desktop .inner-wrapper {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  border-radius: 99px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  background-color: transparent;
+}
+
+.desktop .inner-wrapper:hover {
+  background-color: #bab6ff40;
+}
+
+.desktop .inner-wrapper:hover .text-wrapper {
+  color: #ffffff;
+}
+
+.desktop .inner-wrapper:hover .img {
+  filter: brightness(0) invert(1);
+}
+
+.desktop .text-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--base-medium-font-family);
+  font-weight: var(--base-medium-font-weight);
+  color: #a2a6ab;
+  font-size: var(--base-medium-font-size);
+  letter-spacing: var(--base-medium-letter-spacing);
+  line-height: var(--base-medium-line-height);
+  white-space: nowrap;
+  font-style: var(--base-medium-font-style);
+}
+
+.desktop .line {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 1px;
+  object-fit: cover;
+}
+
+.desktop .footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  margin-bottom: -1.00px;
+  margin-left: -1.00px;
+  margin-right: -1.00px;
+  z-index: 1;
+  background-color: transparent;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none;
+  border-color: #e2e8f01a;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.desktop .footer:hover {
+  background-color: #1e293b;
+}
+
+.desktop .footer .img {
+  filter: brightness(0) invert(1);
+}
+
+.desktop .div {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.desktop .avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: #ffb21f;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.desktop .big-shoes-avatar {
+  position: absolute;
+  width: 180.00%;
+  height: 180.00%;
+  top: 0;
+  left: 0;
+}
+
+.desktop .text-group {
+  display: flex;
+  flex-direction: column;
+  width: 148px;
+  align-items: flex-start;
+  gap: 2px;
+  position: relative;
+}
+
+.desktop .welcome-back {
+  position: relative;
+  align-self: stretch;
+  margin-top: -1.00px;
+  font-family: var(--SM-medium-font-family);
+  font-weight: var(--SM-medium-font-weight);
+  color: #a2a6ab;
+  font-size: var(--SM-medium-font-size);
+  letter-spacing: var(--SM-medium-letter-spacing);
+  line-height: var(--SM-medium-line-height);
+  font-style: var(--SM-medium-font-style);
+}
+
+.desktop .johnathan {
+  position: relative;
+  align-self: stretch;
+  font-family: var(--base-medium-font-family);
+  font-weight: var(--base-medium-font-weight);
+  color: #f8fafc;
+  font-size: var(--base-medium-font-size);
+  letter-spacing: var(--base-medium-letter-spacing);
+  line-height: var(--base-medium-line-height);
+  font-style: var(--base-medium-font-style);
+}
