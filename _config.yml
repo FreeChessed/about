@@ -1,9 +1,6 @@
 # Site settings
-title: "My Awesome Blog"
-email: "your-email@example.com"
-description: "A simple blog about everything."
-baseurl: "/index.html" # the subpath of your site, e.g. "/blog"
-url: "https://freechessed.github.io/about" # the base hostname and protocol for your site
+baseurl: "main/index.html" # the subpath of your site, e.g. "/blog"
+url: "https://freechessed.github.io/" # the base hostname and protocol for your site
 
 # Build settings
 markdown: kramdown
