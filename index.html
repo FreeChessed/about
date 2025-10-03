@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page with Navbar</title>
     <style>
-        /* Basic styles for the navigation bar */
         .navbar {
             background-color: #333;
             overflow: hidden;
@@ -19,7 +18,6 @@
         .navbar li {
             flex: 0 0 auto;
         }
-        /* Style the links inside the navigation bar */
         .navbar a {
             display: block;
             color: white;
@@ -28,29 +26,16 @@
             text-decoration: none;
             transition: background 0.3s, color 0.3s;
         }
-        /* Change the color of links on hover */
         .navbar a:hover,
         .navbar a:focus {
             background-color: #ddd;
             color: black;
             outline: none;
         }
-        /* Highlight the active/current link */
         .navbar a.active {
             background-color: #04AA6D;
             color: white;
         }
-        /* Responsive nav for mobile */
-        @media (max-width: 600px) {
-            .navbar ul {
-                flex-direction: column;
-            }
-            .navbar a {
-                text-align: left;
-                padding: 12px 16px;
-            }
-        }
-        /* Basic page content styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -66,21 +51,13 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
     </style>
+    <!-- js-yaml CDN for parsing YAML files in browser -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 </head>
 <body>
-
     <nav class="navbar" aria-label="Main Navigation">
-      <ul>
-        {% for item in site.data.navigation %}
-          {% assign is_external = item.url contains 'http' %}
-          <li>
-            <a
-              href="{{ item.url }}"
-              {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}
-              {% if page.url == item.url %}class="active"{% endif %}
-            >{{ item.title }}</a>
-          </li>
-        {% endfor %}
+      <ul id="navbar-list">
+        <!-- Navigation items will be injected here by JavaScript -->
       </ul>
     </nav>
     <div class="content">
@@ -89,6 +66,46 @@
         <h2>Page Content</h2>
         <p>Here is some sample content below the navigation bar.</p>
     </div>
+    <script>
+      // Path to your navigation.yml file
+      const NAV_YML_URL = '/about/_data/navigation.yml'; // Change this if needed
 
+      async function loadNavigation() {
+        try {
+          const response = await fetch(NAV_YML_URL);
+          if (!response.ok) throw new Error('Failed to load navigation.yml');
+          const yamlText = await response.text();
+          const navigation = jsyaml.load(yamlText);
+
+          const navbarList = document.getElementById('navbar-list');
+          const currentUrl = window.location.pathname.split('/').pop();
+
+          navigation.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.textContent = item.title;
+            a.href = item.url;
+
+            // Open external links in new tab
+            if (/^https?:\/\//.test(item.url)) {
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+            }
+            // Highlight active link for local pages
+            if (item.url.replace(/^\//,'') === currentUrl) {
+              a.classList.add('active');
+            }
+
+            li.appendChild(a);
+            navbarList.appendChild(li);
+          });
+        } catch (err) {
+          console.error('Navigation bar failed to load:', err);
+          // Optionally display fallback navigation or an error message
+        }
+      }
+
+      loadNavigation();
+    </script>
 </body>
 </html>
