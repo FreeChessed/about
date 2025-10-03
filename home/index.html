@@ -1,87 +1,293 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta charset="utf-8" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeChessed AI Tutor</title>
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="styleguide.css" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-  </head>
-  <body>
+    <!-- js-yaml CDN for parsing YAML files in browser -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f8f8;
+        }
+        .desktop {
+            display: flex;
+        }
+        .sidebar {
+            width: 260px;
+            min-width: 200px;
+            background: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.07);
+        }
+        .sidebar .top {
+            display: flex;
+            align-items: center;
+            padding: 20px 18px 10px 20px;
+            border-bottom: 1px solid #222;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            object-fit: contain;
+        }
+        .ABC-solutions {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 0;
+        }
+        .nav {
+            margin-bottom: 16px;
+        }
+        .nav-item, .inner-wrapper {
+            margin-bottom: 6px;
+        }
+        .inner {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .inner.active, .inner:hover {
+            background: #04AA6D;
+            color: #fff;
+        }
+        .icon img {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+        }
+        .label, .text-wrapper {
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 500;
+        }
+        .footer {
+            padding: 16px;
+            border-top: 1px solid #222;
+            display: flex;
+            align-items: center;
+        }
+        .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .text-group {
+            flex: 1;
+        }
+        .welcome-back {
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+        .johnathan {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .line {
+            width: 80%;
+            margin: 12px 10%;
+            border: none;
+            border-top: 1px solid #666;
+        }
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 24px 24px 24px;
+            background: #f8f8f8;
+            min-height: 100vh;
+        }
+        .content-card {
+            background: #fff;
+            padding: 24px 32px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-width: 700px;
+            width: 100%;
+            margin-top: 24px;
+        }
+        @media (max-width: 700px) {
+            .desktop {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100vw;
+                min-width: 0;
+                height: auto;
+            }
+            .main-content {
+                padding: 12px;
+            }
+            .content-card {
+                padding: 14px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
     <div class="desktop">
-      <div class="sidebar">
-        <div class="top">
-          <div class="logo"><div class="ABC-solutions">FreeChessed AI Tutor</div></div>
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="top">
+                <a class="logo" id="logo-home-link" href="#">
+                    <img src="logo.png" alt="Logo">
+                    <div class="ABC-solutions">FreeChessed AI Tutor</div>
+                </a>
+            </div>
+            <div class="main">
+                <div class="nav" id="sidebar-nav">
+                    <!-- Navigation items will be injected by JS -->
+                </div>
+                <hr class="line" />
+                <div class="nav">
+                    <div class="inner-wrapper">
+                        <div class="inner">
+                            <div class="icon"><img src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-16.svg" /></div>
+                            <div class="text-wrapper">Profile</div>
+                        </div>
+                    </div>
+                    <div class="inner-wrapper">
+                        <div class="inner">
+                            <div class="icon"><img src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-1.svg" /></div>
+                            <div class="text-wrapper">Settings</div>
+                        </div>
+                    </div>
+                    <div class="inner-wrapper">
+                        <div class="inner">
+                            <div class="icon"><img src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-13.svg" /></div>
+                            <div class="text-wrapper">Contribute</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="avatar">
+                    <img src="https://c.animaapp.com/mgbehc8rLFcChm/img/big-shoes-avatar-4.png" />
+                </div>
+                <div class="text-group">
+                    <div class="welcome-back">johndoe@gmail.com</div>
+                    <div class="johnathan">John Doe</div>
+                </div>
+                <img src="https://c.animaapp.com/mgbehc8rLFcChm/img/caret.svg" />
+            </footer>
         </div>
-        <div class="main">
-          <div class="nav">
-            <div class="nav-item">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-5.svg" /></div>
-                <div class="label">Home</div>
-              </div>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-card">
+                <h1>Welcome to the Test Page</h1>
+                <p>This is a test HTML page demonstrating a simple navigation bar with both internal and external links. External links will open in a new tab.</p>
+                <h2>Page Content</h2>
+                <p>Here is some sample content below the navigation bar.</p>
             </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-18.svg" /></div>
-                <div class="text-wrapper">About</div>
-              </div>
-            </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-9.svg" /></div>
-                <div class="text-wrapper">AI Tutor</div>
-              </div>
-            </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-10.svg" /></div>
-                <div class="text-wrapper">Analyze</div>
-              </div>
-            </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-12.svg" /></div>
-                <div class="text-wrapper">Puzzles</div>
-              </div>
-            </div>
-          </div>
-          <img class="line" src="https://c.animaapp.com/mgbehc8rLFcChm/img/line-1-1.svg" />
-          <div class="nav">
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-16.svg" /></div>
-                <div class="text-wrapper">Profile</div>
-              </div>
-            </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-1.svg" /></div>
-                <div class="text-wrapper">Settings</div>
-              </div>
-            </div>
-            <div class="inner-wrapper">
-              <div class="inner">
-                <div class="icon"><img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/icon-13.svg" /></div>
-                <div class="text-wrapper">Contribute</div>
-              </div>
-            </div>
-          </div>
         </div>
-        <footer class="footer">
-          <div class="div">
-            <div class="avatar">
-              <img class="big-shoes-avatar" src="https://c.animaapp.com/mgbehc8rLFcChm/img/big-shoes-avatar-4.png" />
-            </div>
-            <div class="text-group">
-              <div class="welcome-back">johndoe@gmail.com</div>
-              <div class="johnathan">John Doe</div>
-            </div>
-          </div>
-          <img class="img" src="https://c.animaapp.com/mgbehc8rLFcChm/img/caret.svg" />
-        </footer>
-      </div>
     </div>
-  </body>
+    <script>
+      // Raw GitHub URL for navigation.yml 
+      const NAV_YML_URL = 'https://raw.githubusercontent.com/FreeChessed/about/main/_data/navigation.yml';
+      // Home link from navigation.yml
+      let homeLink = 'index.html';
+
+      // Optional: Add icons for each nav item
+      const navIcons = {
+        Home: "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-5.svg",
+        About: "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-18.svg",
+        "AI Tutor": "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-9.svg",
+        Analyze: "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-10.svg",
+        Puzzles: "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-12.svg"
+      };
+
+      async function loadNavigation() {
+        try {
+          const response = await fetch(NAV_YML_URL);
+          if (!response.ok) throw new Error('Failed to load navigation.yml');
+          const yamlText = await response.text();
+          const navigation = jsyaml.load(yamlText);
+
+          // Find "home" link from navigation
+          const homeItem = navigation.find(item => item.title.toLowerCase() === "home");
+          if (homeItem) homeLink = homeItem.url;
+          document.getElementById('logo-home-link').setAttribute('href', homeLink);
+
+          const sidebarNav = document.getElementById('sidebar-nav');
+          sidebarNav.innerHTML = "";
+
+          navigation.forEach(item => {
+            const navWrapper = document.createElement('div');
+            navWrapper.className = item.title === "Home" ? "nav-item" : "inner-wrapper";
+
+            const innerDiv = document.createElement('div');
+            innerDiv.className = "inner";
+            // Highlight About as active
+            if (item.title.toLowerCase() === "about") {
+                innerDiv.classList.add('active');
+            }
+
+            // Icon
+            const iconDiv = document.createElement('div');
+            iconDiv.className = "icon";
+            const iconImg = document.createElement('img');
+            iconImg.className = "img";
+            iconImg.src = navIcons[item.title] || "https://c.animaapp.com/mgbehc8rLFcChm/img/icon-5.svg";
+            iconDiv.appendChild(iconImg);
+
+            // Label
+            const labelDiv = document.createElement('div');
+            labelDiv.className = item.title === "Home" ? "label" : "text-wrapper";
+            labelDiv.textContent = item.title;
+
+            // Link wrapper
+            innerDiv.appendChild(iconDiv);
+            innerDiv.appendChild(labelDiv);
+
+            // Make the nav item clickable
+            innerDiv.onclick = function() {
+                if (/^https?:\/\//.test(item.url)) {
+                    window.open(item.url, "_blank", "noopener");
+                } else {
+                    window.location.href = item.url;
+                }
+            };
+
+            navWrapper.appendChild(innerDiv);
+            sidebarNav.appendChild(navWrapper);
+          });
+        } catch (err) {
+          console.error('Navigation bar failed to load:', err);
+          document.getElementById('sidebar-nav').innerHTML = '<div class="nav-item"><div class="inner">Navbar failed to load</div></div>';
+        }
+      }
+
+      loadNavigation();
+    </script>
+</body>
 </html>
