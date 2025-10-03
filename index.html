@@ -10,49 +10,79 @@
             background-color: #333;
             overflow: hidden;
         }
-        
+        .navbar ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+        }
+        .navbar li {
+            flex: 0 0 auto;
+        }
         /* Style the links inside the navigation bar */
         .navbar a {
-            float: left;
             display: block;
             color: white;
             text-align: center;
-            padding: 14px 16px;
+            padding: 14px 20px;
             text-decoration: none;
+            transition: background 0.3s, color 0.3s;
         }
-        
         /* Change the color of links on hover */
-        .navbar a:hover {
+        .navbar a:hover,
+        .navbar a:focus {
             background-color: #ddd;
             color: black;
+            outline: none;
         }
-        
         /* Highlight the active/current link */
         .navbar a.active {
             background-color: #04AA6D;
             color: white;
         }
-
+        /* Responsive nav for mobile */
+        @media (max-width: 600px) {
+            .navbar ul {
+                flex-direction: column;
+            }
+            .navbar a {
+                text-align: left;
+                padding: 12px 16px;
+            }
+        }
         /* Basic page content styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: #f8f8f8;
         }
         .content {
-            padding: 20px;
+            padding: 24px;
+            background: #fff;
+            margin: 24px auto;
+            max-width: 700px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <a class="active" href="#">Home</a>
-        <a href="https://example.com" target="_blank">External Site</a>
-        <a href="https://www.google.com" target="_blank">Google</a>
-        <a href="#contact">Contact (not a real link)</a>
-    </div>
-
+    <nav class="navbar" aria-label="Main Navigation">
+      <ul>
+        {% for item in site.data.navigation %}
+          {% assign is_external = item.url contains 'http' %}
+          <li>
+            <a
+              href="{{ item.url }}"
+              {% if is_external %}target="_blank" rel="noopener noreferrer"{% endif %}
+              {% if page.url == item.url %}class="active"{% endif %}
+            >{{ item.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
     <div class="content">
         <h1>Welcome to the Test Page</h1>
         <p>This is a test HTML page demonstrating a simple navigation bar with both internal and external links. External links will open in a new tab.</p>
