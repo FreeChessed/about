@@ -8,6 +8,7 @@
         .navbar {
             background-color: #333;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         .navbar ul {
             margin: 0;
@@ -56,9 +57,7 @@
 </head>
 <body>
     <nav class="navbar" aria-label="Main Navigation">
-      <ul id="navbar-list">
-        <!-- Navigation items will be injected here by JavaScript -->
-      </ul>
+      <ul id="navbar-list"></ul>
     </nav>
     <div class="content">
         <h1>Welcome to the Test Page</h1>
@@ -67,8 +66,8 @@
         <p>Here is some sample content below the navigation bar.</p>
     </div>
     <script>
-      // Path to your navigation.yml file
-      const NAV_YML_URL = '/about/_data/navigation.yml'; // Change this if needed
+      // Raw GitHub URL for navigation.yml (replace with your repo/user if needed)
+      const NAV_YML_URL = 'https://raw.githubusercontent.com/FreeChessed/about/main/_data/navigation.yml';
 
       async function loadNavigation() {
         try {
@@ -102,6 +101,7 @@
         } catch (err) {
           console.error('Navigation bar failed to load:', err);
           // Optionally display fallback navigation or an error message
+          document.getElementById('navbar-list').innerHTML = '<li><a href="#">Navbar failed to load</a></li>';
         }
       }
 
