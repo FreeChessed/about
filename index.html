@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page with Navbar</title>
+    <style>
+        /* Basic styles for the navigation bar */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        
+        /* Style the links inside the navigation bar */
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        
+        /* Change the color of links on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        
+        /* Highlight the active/current link */
+        .navbar a.active {
+            background-color: #04AA6D;
+            color: white;
+        }
+
+        /* Basic page content styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a class="active" href="#">Home</a>
+        <a href="https://example.com" target="_blank">External Site</a>
+        <a href="https://www.google.com" target="_blank">Google</a>
+        <a href="#contact">Contact (not a real link)</a>
+    </div>
+
+    <div class="content">
+        <h1>Welcome to the Test Page</h1>
+        <p>This is a test HTML page demonstrating a simple navigation bar with both internal and external links. External links will open in a new tab.</p>
+        <h2>Page Content</h2>
+        <p>Here is some sample content below the navigation bar.</p>
+    </div>
+
+</body>
+</html>
